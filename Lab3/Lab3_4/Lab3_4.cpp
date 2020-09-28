@@ -1,6 +1,7 @@
 ﻿
 #include <iostream>
 #include <math.h>
+#include <iomanip>
 char on;
 
 
@@ -8,7 +9,7 @@ using namespace std;
 
 
 int n ;
-float Func(int i =1) {
+double Func(int i =1) {
     if (i == n) {
         return sqrt(n);
     }
@@ -31,7 +32,7 @@ int main()
             goto bad;
         }
         n = n * 2 + 1;
-        cout << "Ответ : " << Func()<<endl;
+        cout << "Ответ : " <<setprecision(12)<< Func()<<endl;
 
        bad: cout << "Продолжить работу? (y/n)\n";
         cin >> on;

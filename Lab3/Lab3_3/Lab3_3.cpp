@@ -10,7 +10,7 @@ char on;
 
 const int space = 12;
 
-double eps = 0.00000000001;
+double eps = 0.0000001;
 
 int n =1;
 
@@ -25,8 +25,9 @@ long double S(double x)
 	long double Sum = pow(x, 3);
 	long double last = pow(x, 3);
 	n =0;
-	while (last > eps) {
+	while (abs(last) > eps) {
 		n++;
+
 		long double k = (-pow(x, 2) * (2*n - 1)) / (2*n + 1);
 		last *= k;
 		Sum += last;
@@ -66,7 +67,14 @@ int main()
 
 		printHorizontalLine();
 		cout << "Продолжить работу? (y/n)\n";
-		cin >> on;
+		
+		
+		
+		if (cin.fail() == false) {cin >> on;
+		cin.clear(10);
+		cin.get();
+		cin.ignore(32767, '\n');
+		}
 		printHorizontalLine();
 	} while (on != 'n');
 	return 0;

@@ -9,7 +9,7 @@ int main()
 {
     system("chcp 1251 > nul");
     do {
-        float a,s;
+        double a,s;
         a = s = 1;
         cout << "Введите a : ";
         cin >> a;

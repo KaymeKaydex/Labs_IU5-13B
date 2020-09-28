@@ -14,13 +14,11 @@ static int Sign(double a) {
     if (a > 0) return 1;
     return -1;
 }
-
 static int Sign(int a) {
     if (a == 0) return 0;
     if (a > 0) return 1;
     return -1;
 }
-
 static int Sign(float a) {
     if (a == 0) return 0;
     if (a > 0) return 1;
@@ -59,7 +57,7 @@ double Neuwton(int k = 1, int x0 = 1) {
     return nextX;
 }
 //END OF TASK 1-2
-
+ 
 
 //TASK 3
 long double BisectionMethod(double Xn, double Xk, long double k) {
@@ -80,7 +78,21 @@ long double BisectionMethod(double Xn, double Xk, long double k) {
 }
 //END OF TASK 3
 
+//Task 4
+double SimpleIteration(double x0) {
+    double next = x0;
+    double current = x0;
+    n = 0;
+    while ((abs(current - next) > eps) || (n == 0))
+    {
+        n++;
 
+        current = next;
+        next = current - FunctionTask1(current,1);
+    }
+    return next;
+}
+//END OF TASK 4
 
 
 
@@ -124,10 +136,18 @@ int main()
         cout << "Полученный результат  >> " << BisectionMethod(Xn,Xk,k) << endl;
         cout << "Результат получен шагом номер >> " << n << endl;
         break;
-    
+    case 4:
+        cout << "Метод простых иттераций\n";
+        cout << "Введите X0 >> ";
+        int x0;
+        cin >> x0;
+        cout << "Результат >> " << SimpleIteration(x0) << endl;
+        cout << "Результат получен шагом номер >> " << n << endl;
+
+        break;
         default:
             string input;
-            cout << "Введеты недопустимые значения. Попробовать снова?(Если нет - оставьте поле пустым)";
+            cout << "Введеты недопустимые значения. Попробовать снова?(Если нет - оставьте поле пустым)\n";
             cin >> input;
             if (input[0]) main();
             break;
