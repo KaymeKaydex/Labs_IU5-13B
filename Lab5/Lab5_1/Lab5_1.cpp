@@ -28,7 +28,8 @@ void BubbleSort(int* Array) {
 }
 void MaxMinSort(int* Array) {
 	ni = 0;
-	int Tmax = -1, TmaxIndex;
+	int Tmax = -1, TmaxIndex ;
+	TmaxIndex = 0;
 	for (int i = 0; i < N; i++) {
 		for (int j = i; j < N; j++) {
 			if (Array[j] > Tmax) { 

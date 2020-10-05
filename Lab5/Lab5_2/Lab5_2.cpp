@@ -3,73 +3,97 @@
 #include <iomanip>
 #include "Header.h"
 
-
-
 using namespace std;
 
-string names[10] = { "Alex", "Kail","Michel","Maks","Antony","Serega","Leva","Leha","Lexus","Vova" };
 
-const int N = 10;
-const int space = 7;
-
-struct Date 
-{
-	int day;
-	int month;
-	int year;
-};
 struct Student 
 {
-	friend ostream& operator<< (ostream& out, const Student& student); // перегрузка
-
 	string name;
 	Date birthDay;
-	char id[8];
+	char id[8];//номер зачётной книжки
+
+	friend ostream& operator<< (std::ostream& out, const Student& person);
 
 };
-ostream& operator<< (std::ostream& out, const Student& student) {
-	out <<setw(space)<< student.name << " " << setw(space)<<student.birthDay.day <<
-		'.' << student.birthDay.month << '.' << student.birthDay.year << " "<<
-		setw(space) << student.id;
+std::ostream& operator<< (std::ostream& out, const Student& person)
+{
+	out << person.name <<" "<<setw(7)<<person.birthDay.day<< "." << person.birthDay.month <<"."<< person.birthDay.year << setw(5) << " "<< person.id;
+
 	return out;
-} // Перегрузка вывода структуры
-
-void RandomizeStudenst(Student *group) {
-	
-	for (int i = 0; i < N; i++) {
-		group[i].name = names[i];
-		group[i].birthDay.day = rand() % 31 + 1;
-		group[i].birthDay.month = rand() % 12 + 1;
-		group[i].birthDay.year =1900 + rand()%100 ;
-		for (int l = 0; l < 6; l++) {
-			group[i].id[l] = 192 +rand()%20;
-		}
-	}
-}
-void ShowStudents(Student* group) {
-		for (int i = 0; i < N; i++) 
-		{	
-			cout << group[i] << endl;
-		}
 }
 
-int Menu() {
-	cout << "================СОРТИРОВКА МАССИВОВ===================\n";
-	cout << "\t1 - Исходный список группы студентов\n";
-	cout << "\t2 – miniMax: Сортировка по убыванию даты рождения студента\n";
 
-	cout << "\t5 - bubbleEnd: Сортировка по возрастанию id студента\n";
-	cout << "\t8 - Выход\n";
-	int choice;
-	cout << "Выберите действие\n";
-	cin >> choice;
-	while (cin.fail()) {//исключение зацикливания в случае ввода недопустимых символов
-		cout << "Ошибка ввода. Повторите ввод\n";
-		cin.clear();//сброс в потоке флага ошибки
-		cin.ignore(20, '\n');//извлечение из буфера потока введенных символов
-		cin >> choice;//повторный ввод
+
+
+
+
+Student group[10] =
+{
+	{"Vasya",1,5,2001,"yy43-n"},
+	{"Anton",5,7,2002,"1443-r"},
+	{"Kolya",3,8,2000,"u243-i"},
+	{"Leha",14,12,2005,"1253-u"},
+	{"Alex",27,7,2006,"1223-a"},
+	{"Senya",10,2,2003,"1143-f"},
+	{"Danil",19,12,2000,"1643-k"},
+	{"Vova",18,4,2001,"1288-h"},
+	{"Anatolii",8,11,2001,"1773-a"},
+	{"Peter",10,11,2001,"1343-n"}
+};
+
+template <typename T>
+bool cmp1(T a, T b) { return a.name > b.name; }					// Сортировка по возрастанию
+//bool cmp2(int a, int b) { return a < b; };
+template <typename T>
+
+bool cmp3(T a, T b) { return a.id > b.id; }	//Сортировка строк
+
+template <typename T>
+bool cmp4(T a, T b)
+{
+	if (a.birthDay.year == b.birthDay.year) {
+		if (a.birthDay.month == b.birthDay.month)
+		{
+			return (a.birthDay.day > b.birthDay.day);
+		}
+		else return (a.birthDay.month > b.birthDay.month);
 	}
-	return choice;
+	else
+	{
+		return(a.birthDay.year > b.birthDay.year);
+	}
+}
+
+typedef  bool (*CMP)(Student& obj1, Student& obj2);
+
+// Определяем массив указателей на функции
+CMP cmp[3] = { cmp1,cmp3 };
+
+
+//bool (*cmp[3])(T obj1, T obj2) = { cmp1,cmp3,cmp4 };
+
+
+
+
+
+
+template <typename T>
+void BubbleSort1(CMP c, T* Array, unsigned short int lenght = 1) {
+
+	for (int i = lenght - 1; i >= 1; i--)
+	{
+		for (int j = 0; j < i; j++)
+		{
+			if (  c(Array[j] , Array[j + 1]))
+			{
+				auto temp = Array[j];
+					Array[j] = Array[j + 1];
+					Array[j + 1] = temp;
+
+			}
+
+		}
+	}
 }
 
 
@@ -77,41 +101,36 @@ int Menu() {
 
 int main()
 {
-
-	system("chcp 1251 > nul");
-
-	Student group[10] = {
-		{"Alex",5,7,19,"234y-4"},
-		{"Kail",5,7,19,"234y-4"},
-		{"Michel",5,7,19,"234y-4"},
-		{"Maks",5,7,19,"234y-4"},
-		{"Antony",5,7,19,"234y-4"},
-		{"Serega",5,7,19,"234y-4"},
-		{"Leva",5,7,19,"234y-4"},
-		{"Leha",5,7,19,"234y-4"},
-		{"Lexus",5,7,19,"234y-4"},
-		{"Vova",5,7,19,"234y-4"},
-	};
-
-	//RandomizeStudenst(group);
+	setlocale(LC_ALL, "Russian");
+	string rt;
 
 	while (true) {
 		switch (Menu()) {
-		case 1:
-			ShowStudents(group);
-			break;//выполнение действия задания 
-		case 2:
-			Sort(group, 10);
-			break;
+		case 1: 
+			Show(group,10);
+			break; 
+		//case 2: 
+		//	break;
+		//case 3:
+		//	break;
+		//case 4:0
+		//	break;
+		case 5:
+			
+			
+			BubbleSort1(cmp4, group, 10);
 
-		case 8:
-			return 0;//завершение работы
-		default: cout << "Недопустимое действие.Повторите выбор.\n";
+			break;
+		case 6:
+			break;
+		case 7:
+			break;
+		case 8: return 0;//завершение работы
+		default: 
+			cout << "Недопустимое действие.Повторите выбор.\n";
+			break;
 		}
 	}
 
-	return 0;
-
-
-
+	
 }

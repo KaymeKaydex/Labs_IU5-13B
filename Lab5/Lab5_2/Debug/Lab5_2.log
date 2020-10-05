@@ -1,7 +1,2 @@
 ﻿  Lab5_2.cpp
-C:\Users\User\Desktop\Bauman\Labs\Lab5\Lab5_2\Header.h(39,1): error C3867: "std::basic_string<char,std::char_traits<char>,std::allocator<char>>::c_str": нестандартный синтаксис; используйте "&", чтобы создать указатель на член
-C:\Users\User\Desktop\Bauman\Labs\Lab5\Lab5_2\Lab5_2.cpp(104): message : выполняется компиляция ссылки на экземпляр шаблон функции "void Sort<Student>(T [],int)"
-          with
-          [
-              T=Student
-          ]
+  Lab5_2.vcxproj -> C:\Users\User\Desktop\Bauman\Labs\Lab5\Debug\Lab5_2.exe

@@ -83,7 +83,7 @@ double SimpleIteration(double x0) {
     double next = x0;
     double current = x0;
     n = 0;
-    while ((abs(current - next) > eps) || (n == 0))
+    while (((abs(current - next) > eps) || (n == 0)) && n<Nmax)
     {
         n++;
 
