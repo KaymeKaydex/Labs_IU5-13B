@@ -8,15 +8,15 @@ using namespace std;
 
 struct Date
 {
-	int day;
-	int month;
-	int year;
+	int day;		//День
+	int month;		//Месяц
+	int year;		//Год
 };
 struct Student
 {
-	string name;
-	Date birthDay;
-	char id[8];//номер зачётной книжки
+	string name;		//Имя сутдента
+	Date birthDay;		//День рождения 
+	char id[8];			//номер зачётной книжки
 
 	friend ostream& operator<< (std::ostream& out, const Student& person);
 
@@ -30,10 +30,10 @@ std::ostream& operator<< (std::ostream& out, const Student& person)
 
 
 template <typename T>
-bool cmp1(T a, T b) { return a.name > b.name; }					// Сортировка по имени
+bool cmp1(T a, T b) { return a.name > b.name; }								// Сортировка по имени
 template <typename T>
 bool cmp3(T a, T b) { return strcmp(a.id, b.id) > 0;}						//Сортировка по зачетной книжке
-template <typename T>											//Сортировка по дате родждения
+template <typename T>														//Сортировка по дате родждения
 bool cmp2(T a, T b)
 {
 	if (a.birthDay.year == b.birthDay.year) {
@@ -51,7 +51,7 @@ bool cmp2(T a, T b)
 
 typedef  bool (*CMP)(Student& obj1, Student& obj2);
 
-CMP cmp[3] = { cmp1,cmp2,cmp3 };
+CMP cmp[3] = { cmp1,cmp2,cmp3 };											//Массив ссылок на функции компаратора(сравнения)
 
 
 
@@ -78,9 +78,9 @@ void BubbleSort1(CMP c, T* Array, unsigned short int lenght = 1) {
 }
 template <typename T>
 void MaxMinSort(CMP c,T* Array,unsigned short int lenght) {
-	Student Tmax = {" ",0,0,0," "};
-	int TmaxIndex;
-	TmaxIndex = 0;
+	Student Tmax = {" ",0,0,0," "};											//Предварительный "Максимальный студент"
+	int TmaxIndex;															//Индекс максимального эллемента
+	TmaxIndex = 0;															
 	for (int i = 0; i < lenght; i++) {
 		for (int j = i; j < lenght; j++) {
 			if (c(Array[j],Tmax)) {
@@ -101,8 +101,9 @@ void MaxMinSort(CMP c,T* Array,unsigned short int lenght) {
 int main()
 {
 	setlocale(LC_ALL, "Russian");
-
-	Student group[10] =
+	
+	
+	Student group[10] =									// Объявляем и инициализируем группу студентов из 10 человек
 	{
 		{"Vasya",1,5,2001,"yy43-n"},
 		{"Anton",5,7,2002,"1443-r"},

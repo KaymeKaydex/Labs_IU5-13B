@@ -2,16 +2,27 @@
 #include <iomanip>
 using namespace std;
 
-int N,ni;
+int N,ni,swapCounter;
 
+
+void ShowCounter() {
+	cout << "Количество swap >> " << swapCounter<<endl;
+	cout << "Количество проверок >> " << ni << endl;
+}
+int Rand(int a, int b) {
+	b++;
+	return (a  + rand() %(b-a) );
+
+}		//Функция рандома на отрезке [a,b]
 void Randomize(int* Array) {
 	for (int i = 0; i <= N; i++) {
-		Array[i] = rand() % 100 + 1;
+		Array[i] = Rand(1, 10);
 	}
 }
 
 void BubbleSort(int* Array) {
 	ni = 0;
+	swapCounter = 0;
 	for (int i = N - 1; i >= 1; i--)
 		for (int j = 0; j < i; j++)
 		{
@@ -20,7 +31,7 @@ void BubbleSort(int* Array) {
 				int temp = Array[j];
 				Array[j] = Array[j + 1];
 				Array[j + 1] = temp;
-				
+				swapCounter++;
 			}
 			ni++;
 		}
@@ -28,6 +39,7 @@ void BubbleSort(int* Array) {
 }
 void MaxMinSort(int* Array) {
 	ni = 0;
+	swapCounter = 0;
 	int Tmax = -1, TmaxIndex ;
 	TmaxIndex = 0;
 	for (int i = 0; i < N; i++) {
@@ -35,6 +47,7 @@ void MaxMinSort(int* Array) {
 			if (Array[j] > Tmax) { 
 				Tmax = Array[j];
 				TmaxIndex = j;
+				swapCounter++;
 			}
 			ni++;
 			
@@ -43,6 +56,7 @@ void MaxMinSort(int* Array) {
 		Array[i] = Tmax;
 		Tmax = -1;
 	}
+	
 }
 void Reverse(int* Array) {
 	for (int i = 0; i < N/2; i++) {
@@ -63,6 +77,8 @@ void Show(int* Array) {
 int main()
 {
 	system("chcp 1251 > nul");
+	
+
 
 	char on = 'y';
 	do {
@@ -82,25 +98,59 @@ int main()
 		else {
 			Randomize(array);
 		}
-		Show(array);
+		
 
 		cout << "\n\n====================Пузырьковая сортировка====================" << endl;
+		
+		cout << "Перед выполнением сортировки массив был изменен след. образом... \n";
+		Randomize(array);
+		Show(array);
+
+		
+		cout << "Сортировка не упорядоченного массива\n";
 		BubbleSort(array);
 		Show(array);
-		cout << "Кол-во иттераций : " << ni;
+		ShowCounter();
+
+		
+		cout << "Сортировка упорядоченного по возрастанию массива\n";
+		BubbleSort(array);
+		Show(array);
+		ShowCounter();
+
+		cout << "Сортировка упорядоченного по убыванию массива\n";
+		Reverse(array);
+		BubbleSort(array);
+		Show(array);
+		ShowCounter();
+
 		cout << "\n\n====================Метод минмального, максимального====================" << endl;
 		cout << "Перед выполнением сортировки массив был изменен след. образом... \n";
 		Randomize(array);
 		Show(array);
-		cout << "Отсортированный массив: ";
+
+		cout << "Сортировка не упорядоченного массива\n";
+		MaxMinSort(array);
+		Reverse(array);
+		Show(array);
+		ShowCounter();
+
+		
+		cout << "Сортировка упорядоченного по возрастанию массива\n";
+		MaxMinSort(array);
+		
+		Show(array);
+		ShowCounter();
+
+		cout << "Сортировка упорядоченного по убыванию массива\n";
 		MaxMinSort(array);
 		Show(array);
-		Reverse(array);
-		cout << "Проверка реверса\n";
-		Show(array);
-		cout << "Кол-во иттераций : " << ni;
-		// END OF PROGRAM BLOCK
+		ShowCounter();
 
+
+
+		// END OF PROGRAM BLOCK
+		
 		cout << "\n\nПродолжить работу программы?(y/n) >> ";
 		cin >> on;
 		while (cin.fail()) {
@@ -111,6 +161,7 @@ int main()
 		}
 		
 	} while (on != 'n');
+		
 		return 0;
 	
 
