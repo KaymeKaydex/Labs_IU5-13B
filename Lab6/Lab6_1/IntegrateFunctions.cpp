@@ -1,5 +1,7 @@
 #include <math.h>
 
+
+
 typedef double(*TPF)(double);
 double IntTrap(TPF f, double a, double b, double eps, int& n) {
 	n = 0;
@@ -17,7 +19,7 @@ double IntRect(TPF f, double a, double b, double eps, int& n) {
 	n = 0;
 	double result = 0;
 	for (double i = a; i < b; i += eps) {
-		result += f(a) * eps;
+		result += (f(i) * eps);
 		n++;
 	}
 	return result;

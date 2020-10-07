@@ -48,6 +48,7 @@ int main() {
 
 	for (int i=0;i<5;i++) //Проходимся по таблицам
 	{
+		cout << "Eps for this table is " <<fixed<< pow(0.1, i + 1)<<endl;
 		for (int j = 0; j < 4; j++) // Проходимся по строкам 1-ой таблицы
 		{ 
 			table[j].i_sum = alg(funcs[j], a, b, pow(0.1,i+1), table[j].n);
