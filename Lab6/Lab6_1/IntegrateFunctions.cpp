@@ -1,26 +1,56 @@
 #include <math.h>
 
-
+double abs(double a) {
+	if (a > 0) return a;
+	return -a;
+}
 
 typedef double(*TPF)(double);
+
+double RectIntwithN(TPF f, double a, double b, int n);
+double TrapIntwithN(TPF f, double a, double b, int n);
+
+
 double IntTrap(TPF f, double a, double b, double eps, int& n) {
-	n = 0;
+	double s = 0;
+	n = 1;
+	double s1 = TrapIntwithN(f, a, b, n);
+	do {
+		s = s1;    
+		n +=10;  
+		s1 = TrapIntwithN(f, a, b, n);
+	} while (fabs(s1 - s) > eps);
+	return s1;
+}
+double TrapIntwithN(TPF f, double a, double b, int n)
+{
+	double  result = 0;
 	double left = f(a);
-	double result = 0;
-	
-	for (double i = a+eps; i <= b; i += eps) {
-		result += 0.5 * (left + f(i)) * eps;
+	double delX = (b - a) / n;
+	for (double i = a + delX; i <= b; i += delX) //((b - a) / n) - delta x
+	{
+		result += 0.5 * (left + f(i))*delX;
 		left = f(i);
-		n++;
 	}
 	return result;
 }
+
 double IntRect(TPF f, double a, double b, double eps, int& n) {
-	n = 0;
+	double s = 0;
+	n = 1;
+	double s1 = RectIntwithN(f, a, b, n);
+	do {
+		s = s1;
+		n += 10;
+		s1 = RectIntwithN(f, a, b, n);
+	} while (fabs(s1 - s) > eps);
+	return s1;
+}
+double RectIntwithN(TPF f, double a, double b, int n) {
+	double delX = (b - a) / n;
 	double result = 0;
-	for (double i = a; i < b; i += eps) {
-		result += (f(i) * eps);
-		n++;
+	for (double i = a; i < b; i += delX) {
+		result += (f(i) * delX);
 	}
 	return result;
 }
