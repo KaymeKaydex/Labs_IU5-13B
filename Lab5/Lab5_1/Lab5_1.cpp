@@ -21,44 +21,57 @@ void Randomize(int* Array) {
 }
 
 void BubbleSort(int* Array) {
-	ni = 0;
+	
 	swapCounter = 0;
-	for (int i = N - 1; i >= 1; i--)
-		for (int j = 0; j < i; j++)
+	ni = 0;
+
+	int oldlastSwap = 0, lastSwap;
+	while (oldlastSwap != -1)
+	{
+		lastSwap = -1;
+		for (int i = N - 1; i > oldlastSwap; i--)
 		{
-			if (Array[j] > Array[j + 1])
+			ni++;
+			if (Array[i] > Array[i - 1])
 			{
-				int temp = Array[j];
-				Array[j] = Array[j + 1];
-				Array[j + 1] = temp;
+				
+				auto t = Array[i-1];
+				Array[i - 1] = Array[i];
+				Array[i] = t;
+
 				swapCounter++;
+				lastSwap = i;
 			}
-			ni++;
 		}
-	
-}
-void MaxMinSort(int* Array) {
-	ni = 0;
-	swapCounter = 0;
-	int Tmax = -1, TmaxIndex ;
-	TmaxIndex = 0;
-	for (int i = 0; i < N; i++) {
-		for (int j = i; j < N; j++) {
-			if (Array[j] > Tmax) { 
-				Tmax = Array[j];
-				TmaxIndex = j;
-				swapCounter++;
-			}
-			ni++;
-			
-		}
-		Array[TmaxIndex] = Array[i];
-		Array[i] = Tmax;
-		Tmax = -1;
+		oldlastSwap = lastSwap;
 	}
-	
+
 }
-void Reverse(int* Array) {
+
+void MaxMinSort(int* Array) {
+	int max_i, q;
+	swapCounter = ni = 0;
+	int tempN = N;
+	for (int j = 0; j < tempN; tempN--) 
+	{
+		max_i = 0;
+		for (int i = 1; i < tempN; i++) 
+		{
+			ni++;
+			if (Array[i] > Array[max_i]) max_i = i;
+		}
+		if (Array[tempN - 1] != Array[max_i])
+		{
+			swapCounter++;
+			q = Array[tempN - 1];
+			Array[tempN - 1] = Array[max_i];
+			Array[max_i] = q;
+		}
+	}
+}
+	
+template <typename T>
+void Reverse(T* Array) {
 	for (int i = 0; i < N/2; i++) {
 		int temp = Array[i];
 		Array[i] = Array[N - i-1];
@@ -67,10 +80,10 @@ void Reverse(int* Array) {
 }
 
 void Show(int* Array) {		
-	for (int i = 0; i < N; i++) {
+	/*for (int i = 0; i < N; i++) {
 		cout << Array[i] << " ";
 	}
-	cout << " " << endl;
+	cout << " " << endl;*/
 }
 
 
@@ -85,66 +98,79 @@ int main()
 		N =1;
 		cout << "Выберите размер массива>> ";
 		cin >> N;
-		int* array;
-		array = new int[N];
+		int* array1;
+		array1 = new int[N];
 		cout << "Как вы хотите заполнить массив?(1 - вручную, ост. цел значения - автоматически) >> ";
 		int type ;
 		cin >> type;
 		if (type == 1) {
 			for (int i = 0; i < N; i++) {
-				cin >> array[i];
+				cin >> array1[i];
 			}
 		}
-		else {
-			Randomize(array);
+		else 
+		{
+			Randomize(array1);
 		}
 		
 
 		cout << "\n\n====================Пузырьковая сортировка====================" << endl;
 		
 		cout << "Перед выполнением сортировки массив был изменен след. образом... \n";
-		Randomize(array);
-		Show(array);
+		Show(array1);
 
 		
 		cout << "Сортировка не упорядоченного массива\n";
-		BubbleSort(array);
-		Show(array);
+		
+		BubbleSort(array1);
+		Show(array1);
 		ShowCounter();
 
 		
 		cout << "Сортировка упорядоченного по возрастанию массива\n";
-		BubbleSort(array);
-		Show(array);
+		BubbleSort(array1);
+		Show(array1);
 		ShowCounter();
 
 		cout << "Сортировка упорядоченного по убыванию массива\n";
-		Reverse(array);
-		BubbleSort(array);
-		Show(array);
+		Reverse(array1);
+		BubbleSort(array1);
+		Show(array1);
 		ShowCounter();
 
 		cout << "\n\n====================Метод минмального, максимального====================" << endl;
-		cout << "Перед выполнением сортировки массив был изменен след. образом... \n";
-		Randomize(array);
-		Show(array);
+		cout << "Как вы хотите заполнить массив?(1 - вручную, ост. цел значения - автоматически) >> ";
+		cin >> type;
+		if (type == 1) {
+			for (int i = 0; i < N; i++) {
+				cin >> array1[i];
+			}
+		}
+		else
+		{
+			Randomize(array1);
+		}
+		Show(array1);
 
 		cout << "Сортировка не упорядоченного массива\n";
-		MaxMinSort(array);
-		Reverse(array);
-		Show(array);
+		MaxMinSort(array1);
+		
+
+		Show(array1);
 		ShowCounter();
 
 		
 		cout << "Сортировка упорядоченного по возрастанию массива\n";
-		MaxMinSort(array);
+		MaxMinSort(array1);
 		
-		Show(array);
+
+		Show(array1);
 		ShowCounter();
 
 		cout << "Сортировка упорядоченного по убыванию массива\n";
-		MaxMinSort(array);
-		Show(array);
+		MaxMinSort(array1);
+
+		Show(array1);
 		ShowCounter();
 
 
@@ -160,7 +186,8 @@ int main()
 			cin >> on;
 		}
 		
-	} while (on != 'n');
+		} while (on != 'n');
+		
 		
 		return 0;
 	

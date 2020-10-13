@@ -18,7 +18,7 @@ void PrintTabl(I_print i_prn[], int k)
 {
 	system("chcp 866>nul");
 	const int m = 4;//число столбцов таблицы
-	int wn[m] = { 12,18,18,10 };//ширина столбцов таблицы
+	int wn[m] = { 14,20,20,12 };//ширина столбцов таблицы
 	const char* title[m] = { "Function","Integral","IntSum","N " };
 	int size[m];
 	for (int i = 0; i < m; i++)
@@ -42,7 +42,10 @@ void PrintTabl(I_print i_prn[], int k)
 
 		cout << setw(wn[m - 1]) << char(180) << setfill(' ') << endl;
 
+		if(i%2!=0)
 		cout << char(179) << setw((wn[0] - strlen(i_prn[i].name)) / 2) << ' ' << i_prn[i].name << setw((wn[0] - strlen(i_prn[i].name)) / 2) << char(179);
+		else 
+		cout << char(179) << setw((wn[0] - strlen(i_prn[i].name)) / 2) << ' ' << i_prn[i].name << setw((wn[0] - strlen(i_prn[i].name)) / 2) <<" "<< char(179);
 
 		cout << setw(wn[1] - 1) << setprecision(10) << i_prn[i].i_toch << char(179)
 			<< setw(wn[2] - 1) << i_prn[i].i_sum << char(179)

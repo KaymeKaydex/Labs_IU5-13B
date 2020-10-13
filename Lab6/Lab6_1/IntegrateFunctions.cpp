@@ -17,9 +17,9 @@ double IntTrap(TPF f, double a, double b, double eps, int& n) {
 	double s1 = TrapIntwithN(f, a, b, n);
 	do {
 		s = s1;    
-		n +=10;  
+		n *=3;  
 		s1 = TrapIntwithN(f, a, b, n);
-	} while (fabs(s1 - s) > eps);
+	} while (fabs(s1 - s) >= (eps/3));
 	return s1;
 }
 double TrapIntwithN(TPF f, double a, double b, int n)
@@ -41,9 +41,9 @@ double IntRect(TPF f, double a, double b, double eps, int& n) {
 	double s1 = RectIntwithN(f, a, b, n);
 	do {
 		s = s1;
-		n += 10;
+		n *=3;
 		s1 = RectIntwithN(f, a, b, n);
-	} while (fabs(s1 - s) > eps);
+	} while (fabs(s1 - s) >= (eps/3));
 	return s1;
 }
 double RectIntwithN(TPF f, double a, double b, int n) {
