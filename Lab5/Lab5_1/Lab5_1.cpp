@@ -2,16 +2,16 @@
 #include <iomanip>
 using namespace std;
 
-int N,ni,swapCounter;
+int N, ni, swapCounter;
 
 
 void ShowCounter() {
-	cout << "Количество swap >> " << swapCounter<<endl;
+	cout << "Количество swap >> " << swapCounter << endl;
 	cout << "Количество проверок >> " << ni << endl;
 }
 int Rand(int a, int b) {
 	b++;
-	return (a  + rand() %(b-a) );
+	return (a + rand() % (b - a));
 
 }		//Функция рандома на отрезке [a,b]
 void Randomize(int* Array) {
@@ -21,7 +21,7 @@ void Randomize(int* Array) {
 }
 
 void BubbleSort(int* Array) {
-	
+
 	swapCounter = 0;
 	ni = 0;
 
@@ -34,8 +34,8 @@ void BubbleSort(int* Array) {
 			ni++;
 			if (Array[i] > Array[i - 1])
 			{
-				
-				auto t = Array[i-1];
+
+				auto t = Array[i - 1];
 				Array[i - 1] = Array[i];
 				Array[i] = t;
 
@@ -52,10 +52,10 @@ void MaxMinSort(int* Array) {
 	int max_i, q;
 	swapCounter = ni = 0;
 	int tempN = N;
-	for (int j = 0; j < tempN; tempN--) 
+	for (int j = 0; j < tempN; tempN--)
 	{
 		max_i = 0;
-		for (int i = 1; i < tempN; i++) 
+		for (int i = 1; i < tempN; i++)
 		{
 			ni++;
 			if (Array[i] > Array[max_i]) max_i = i;
@@ -69,17 +69,17 @@ void MaxMinSort(int* Array) {
 		}
 	}
 }
-	
+
 template <typename T>
 void Reverse(T* Array) {
-	for (int i = 0; i < N/2; i++) {
+	for (int i = 0; i < N / 2; i++) {
 		int temp = Array[i];
-		Array[i] = Array[N - i-1];
-		Array[N - i-1] = temp;
+		Array[i] = Array[N - i - 1];
+		Array[N - i - 1] = temp;
 	}
 }
 
-void Show(int* Array) {		
+void Show(int* Array) {
 	/*for (int i = 0; i < N; i++) {
 		cout << Array[i] << " ";
 	}
@@ -90,44 +90,48 @@ void Show(int* Array) {
 int main()
 {
 	system("chcp 1251 > nul");
-	
+
 
 
 	char on = 'y';
 	do {
-		N =1;
+		N = 1;
 		cout << "Выберите размер массива>> ";
 		cin >> N;
 		int* array1;
 		array1 = new int[N];
 		cout << "Как вы хотите заполнить массив?(1 - вручную, ост. цел значения - автоматически) >> ";
-		int type ;
+		int type;
 		cin >> type;
 		if (type == 1) {
 			for (int i = 0; i < N; i++) {
 				cin >> array1[i];
 			}
 		}
-		else 
+		else
 		{
 			Randomize(array1);
 		}
-		
+
 
 		cout << "\n\n====================Пузырьковая сортировка====================" << endl;
-		
+
 		cout << "Перед выполнением сортировки массив был изменен след. образом... \n";
 		Show(array1);
 
-		
+
 		cout << "Сортировка не упорядоченного массива\n";
-		
+
 		BubbleSort(array1);
 		Show(array1);
 		ShowCounter();
 
-		
+
 		cout << "Сортировка упорядоченного по возрастанию массива\n";
+		cout << "array1[0]: " << array1[0];
+		cout << "; array1[9999]: " << array1[9999] << endl;
+		array1[9999] = array1[0] + 10;
+		cout << "array1[9999] = array1[0] + 10 = " << array1[9999] << endl;
 		BubbleSort(array1);
 		Show(array1);
 		ShowCounter();
@@ -154,15 +158,16 @@ int main()
 
 		cout << "Сортировка не упорядоченного массива\n";
 		MaxMinSort(array1);
-		
+
 
 		Show(array1);
 		ShowCounter();
 
-		
+
 		cout << "Сортировка упорядоченного по возрастанию массива\n";
+		array1[9999] = array1[0] + 10;
 		MaxMinSort(array1);
-		
+
 
 		Show(array1);
 		ShowCounter();
@@ -176,7 +181,7 @@ int main()
 
 
 		// END OF PROGRAM BLOCK
-		
+
 		cout << "\n\nПродолжить работу программы?(y/n) >> ";
 		cin >> on;
 		while (cin.fail()) {
@@ -185,12 +190,12 @@ int main()
 			cin.ignore(10, '\n');
 			cin >> on;
 		}
-		
-		} while (on != 'n');
-		
-		
-		return 0;
-	
+
+	} while (on != 'n');
+
+
+	return 0;
+
 
 
 
