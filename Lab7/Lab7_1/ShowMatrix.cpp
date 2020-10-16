@@ -26,27 +26,32 @@ double maxElement(double** a, int nrow, int ncol) {
 	}
 	return max;
 }
-void Show(double** a, int nrow, int ncol, unsigned int nZnakov =0, bool scient = 0)
+void Show(double** a, int nrow, int ncol , unsigned int nZnakov =0, bool scient = 0)
 {
 	if (scient) nZnakov = 0;
 
 	int w = Razryad(maxElement(a, nrow, ncol))+nZnakov +5;
-	int colInOneStr = 80 / (w-5) - 3;
+	if (scient) w += 3;
+
+	int colInOneStr = 105 / (w) ;
 
 	cout << colInOneStr << endl;
-	int maxElement = 2; // Стоит находить его функцией, но представим что масимальная целая часть в матрице это 3 разряда
-	
 	for (int l = 0; l < (double)ncol / colInOneStr; l++)
 	{		//Печатаем ряд
 		for (int j = l*colInOneStr; j < (l+1)*colInOneStr && j<ncol; j++) {
-			cout << setw(w) << "Ряд " << j + 1;
+			if ((j+1)<10)
+				wcout << setw(w) << L"Ряд " << j + 1;
+			else
+			{
+				wcout << setw(w-1) << L"Ряд " << j + 1;
+			}
 		}
 		
 		cout << endl;
 		for (int i = 0; i < nrow; i++) {
-			for (int j = 0; j < ncol; j++) {
+			for (int j = l * colInOneStr; j < (l + 1) * colInOneStr && j < ncol; j++) {
 				if (scient)
-					cout << setw(w) << setprecision(nZnakov) << scientific << a[i][j] << " ";
+					cout << setw(w)<<setprecision(1) << scientific << a[i][j] << " ";
 				else
 					cout << setw(w) << setprecision(nZnakov) << fixed << a[i][j] << " ";
 			}

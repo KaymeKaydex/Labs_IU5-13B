@@ -139,10 +139,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="FillInMatrix.cpp" />
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="ShowMatrix.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="fillInMatrix.h" />
     <ClInclude Include="ShowMatrix.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
