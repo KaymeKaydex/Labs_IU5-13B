@@ -32,7 +32,7 @@ void BubbleSort(int* Array) {
 		for (int i = N - 1; i > oldlastSwap; i--)
 		{
 			ni++;
-			if (Array[i] > Array[i - 1])
+			if (Array[i] < Array[i - 1])
 			{
 
 				auto t = Array[i - 1];
@@ -129,9 +129,9 @@ int main()
 
 		cout << "Сортировка упорядоченного по возрастанию массива\n";
 		cout << "array1[0]: " << array1[0];
-		cout << "; array1[9999]: " << array1[9999] << endl;
-		array1[9999] = array1[0] + 10;
-		cout << "array1[9999] = array1[0] + 10 = " << array1[9999] << endl;
+		cout << "; array1[9999]: " << array1[N-1] << endl;
+		
+		array1[N-1] = -1;
 		BubbleSort(array1);
 		Show(array1);
 		ShowCounter();
@@ -165,7 +165,7 @@ int main()
 
 
 		cout << "Сортировка упорядоченного по возрастанию массива\n";
-		array1[9999] = array1[0] + 10;
+		array1[N-1] = array1[0] + 10;
 		MaxMinSort(array1);
 
 
@@ -173,6 +173,7 @@ int main()
 		ShowCounter();
 
 		cout << "Сортировка упорядоченного по убыванию массива\n";
+		Reverse(array1);
 		MaxMinSort(array1);
 
 		Show(array1);

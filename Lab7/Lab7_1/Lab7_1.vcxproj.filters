@@ -15,21 +15,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ShowMatrix.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="FillInMatrix.cpp">
+    <ClCompile Include="Math.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ShowMatrix.h">
+    <ClInclude Include="Math.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="fillInMatrix.h">
+    <ClInclude Include="PrintMatrix.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

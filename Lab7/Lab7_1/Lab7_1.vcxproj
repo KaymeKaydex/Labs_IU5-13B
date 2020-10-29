@@ -139,13 +139,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="FillInMatrix.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="ShowMatrix.cpp" />
+    <ClCompile Include="Math.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="fillInMatrix.h" />
-    <ClInclude Include="ShowMatrix.h" />
+    <ClInclude Include="Math.h" />
+    <ClInclude Include="PrintMatrix.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

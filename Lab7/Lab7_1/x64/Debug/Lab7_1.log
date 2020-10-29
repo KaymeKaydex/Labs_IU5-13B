@@ -1,2 +1,4 @@
 ﻿  Main.cpp
+C:\Users\User\Desktop\Bauman\Labs\Lab7\Lab7_1\Main.cpp(29,15): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\User\Desktop\Bauman\Labs\Lab7\Lab7_1\Main.cpp(94,57): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
   Lab7_1.vcxproj -> C:\Users\User\Desktop\Bauman\Labs\Lab7\x64\Debug\Lab7_1.exe

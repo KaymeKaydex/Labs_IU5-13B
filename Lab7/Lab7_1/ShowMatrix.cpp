@@ -1,5 +1,6 @@
 #include <iomanip>
 #include <iostream>
+#include "ShowMatrix.h"
 
 using namespace std;
 
@@ -15,7 +16,32 @@ int Razryad(double a)
 	}
 	return i;
 }
-double maxElement(double** a, int nrow, int ncol) {
+int Razryad(int a)
+{
+	int k = (int)a;
+	int i = 0;
+	while (k > 0)
+	{
+		k /= 10;
+		i++;
+	}
+	return i;
+}
+int Razryad(long double a)
+{
+	int k = (int)a;
+	int i = 0;
+	while (k > 0)
+	{
+		k /= 10;
+		i++;
+	}
+	return i;
+}
+
+
+template <typename T>
+double maxElement(T** a, int nrow, int ncol) {
 	double max = NULL;
 	for (int i = 0; i < nrow; i++)
 	{
@@ -26,32 +52,33 @@ double maxElement(double** a, int nrow, int ncol) {
 	}
 	return max;
 }
-void Show(double** a, int nrow, int ncol , unsigned int nZnakov =0, bool scient = 0)
+
+template <typename T>
+void Show(T** a, int nrow, int ncol, int nZnakov = 0, bool scient = 0)
 {
-	if (scient) nZnakov = 0;
 
-	int w = Razryad(maxElement(a, nrow, ncol))+nZnakov +5;
-	if (scient) w += 3;
+	int w = Razryad(maxElement(a, nrow, ncol)) + nZnakov + 5;
 
-	int colInOneStr = 105 / (w) ;
+
+	int colInOneStr = 105 / (w);
 
 	cout << colInOneStr << endl;
 	for (int l = 0; l < (double)ncol / colInOneStr; l++)
 	{		//Печатаем ряд
-		for (int j = l*colInOneStr; j < (l+1)*colInOneStr && j<ncol; j++) {
-			if ((j+1)<10)
+		for (int j = l * colInOneStr; j < (l + 1) * colInOneStr && j < ncol; j++) {
+			if ((j + 1) < 10)
 				wcout << setw(w) << L"Ряд " << j + 1;
 			else
 			{
-				wcout << setw(w-1) << L"Ряд " << j + 1;
+				wcout << setw(w - 1) << L"Ряд " << j + 1;
 			}
 		}
-		
+
 		cout << endl;
 		for (int i = 0; i < nrow; i++) {
 			for (int j = l * colInOneStr; j < (l + 1) * colInOneStr && j < ncol; j++) {
 				if (scient)
-					cout << setw(w)<<setprecision(1) << scientific << a[i][j] << " ";
+					cout << setw(w) << setprecision(nZnakov) << scientific << a[i][j] << " ";
 				else
 					cout << setw(w) << setprecision(nZnakov) << fixed << a[i][j] << " ";
 			}
@@ -60,4 +87,3 @@ void Show(double** a, int nrow, int ncol , unsigned int nZnakov =0, bool scient 
 		}
 	}
 }
-
