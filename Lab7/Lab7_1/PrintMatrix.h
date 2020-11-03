@@ -61,7 +61,7 @@ void Show(T** a, int nrow, int ncol, int nZnakov = 0, bool scient = 0)
 	cout << string(40, '=') << endl;
 	int LenghtOfConsole = 80;
 	int w = Razryad(maxElement(a, nrow, ncol)) + nZnakov + 5;
-
+	if (scient) w += 3;
 
 	int colInOneStr = LenghtOfConsole / (w);
 

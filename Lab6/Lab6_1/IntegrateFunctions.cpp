@@ -12,9 +12,9 @@ double TrapIntwithN(TPF f, double a, double b, int n);
 
 
 double IntTrap(TPF f, double a, double b, double eps, int& n) {
-	double s = 0;
+	register double s = 0;
 	n = 1;
-	double s1 = TrapIntwithN(f, a, b, n);
+	register double s1 = TrapIntwithN(f, a, b, n);
 	do {
 		s = s1;    
 		n *=3;  
@@ -24,10 +24,10 @@ double IntTrap(TPF f, double a, double b, double eps, int& n) {
 }
 double TrapIntwithN(TPF f, double a, double b, int n)
 {
-	double  result = 0;
-	double left = f(a);
-	double delX = (b - a) / n;
-	for (double i = a + delX; i <= b; i += delX) //((b - a) / n) - delta x
+	register double  result = 0;
+	register double left = f(a);
+	register double delX = (b - a) / n;
+	for (register double i = a + delX; i <= b; i += delX) //((b - a) / n) - delta x
 	{
 		result += 0.5 * (left + f(i))*delX;
 		left = f(i);
@@ -36,9 +36,9 @@ double TrapIntwithN(TPF f, double a, double b, int n)
 }
 
 double IntRect(TPF f, double a, double b, double eps, int& n) {
-	double s = 0;
+	register double s = 0;
 	n = 1;
-	double s1 = RectIntwithN(f, a, b, n);
+	register double s1 = RectIntwithN(f, a, b, n);
 	do {
 		s = s1;
 		n *=3;
@@ -47,9 +47,9 @@ double IntRect(TPF f, double a, double b, double eps, int& n) {
 	return s1;
 }
 double RectIntwithN(TPF f, double a, double b, int n) {
-	double delX = (b - a) / n;
-	double result = 0;
-	for (double i = a; i < b; i += delX) {
+	register double delX = (b - a) / n;
+	register double result = 0;
+	for (register double i = a; i < b; i += delX) {
 		result += (f(i) * delX);
 	}
 	return result;

@@ -34,26 +34,39 @@ public :
 	size_t Codirovka;
 	string* buff = new string;
 
-	void CodeTxt()
+	void CodeDecodeTxt()
 	{
-		string* buff;
+		SetConsoleCP(1251);
+
+		char* buff = new char();
 		fstream* writer = new fstream(path,ios::out | ios::in);
-		while (!(*writer).eof())
+		int i = 0;
+		while ((*writer).get(*buff))
 		{
-			(*writer) >> (*buff);
+			if ((*buff) == '\n') continue;
+			(*writer).seekg(-1, ios::cur);
+			int a = *buff;
+			int b = i % Klenght;
+			
+			(*writer) << (char)(a^b);
+				i++;
+				
+			(*writer).seekg((*writer).tellg(), ios::beg);
 
 		}
-		delete buff;
-	}
-	void DecodeTxt()
-	{
+		
+		(*writer).close();
+		delete buff,i,writer;
 
 	}
+	
 	void ReadTxt() 
 	{
-		
+		SetConsoleCP(866);	
+		setlocale(LC_ALL, "rus");
+		(*buff) = "";
 		ifstream* reader = new ifstream(path);
-		SetConsoleCP(1251);
+		
 		if (!(*reader).is_open())
 		{
 			cout << "Ошибка чтения файла\n";
@@ -162,7 +175,7 @@ int main()
 			
 			CodeElement *DCodeFile = new CodeElement("Text.txt",Keys,count,1251);
 			(*DCodeFile).ReadTxt();
-
+			(*DCodeFile).CodeDecodeTxt();
 			return 0;
 	
 	

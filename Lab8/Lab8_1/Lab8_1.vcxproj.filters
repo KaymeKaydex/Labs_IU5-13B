@@ -19,4 +19,12 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="CodeNotepad.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="Text.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

@@ -2,8 +2,7 @@
 #include <iomanip>
 
 #include "PrintMatrix.h" 
-#include "Math.h"
-//#include "ShowMatrix.h"
+
 using namespace std;
 
 int sign(int a) 
@@ -30,6 +29,7 @@ const int x = 1.0; // из методички
 
 int menu()
 {
+	cout << *(*(B + 2)+2);
 	cout << "================ВЫВОД МАТРИЦ===================\n";
 	cout << "\t1 - Вывод матрицы А\n";
 	cout << "\t2 – Вывод матрицы B\n";
@@ -113,12 +113,6 @@ int main()
 		
 	}
 
-
-
-	
-	
-	
-	
 	
 }
 
