@@ -143,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="CodeNotepad.txt" />
+    <Text Include="out.txt" />
     <Text Include="Text.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

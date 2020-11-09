@@ -1,1 +1,11 @@
-vishnya yablonya i grusha angem matanaliz proga vishnya гипофиз
+void Show(static int *a, int n)
+{
+	cout << "[ ";
+	for(int i =0;i<n;i++)
+	{
+		
+		cout << a[i] << ' ';
+	}	
+	cout << "]"<<endl;
+
+}

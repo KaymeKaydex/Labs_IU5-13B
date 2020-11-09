@@ -21,7 +21,7 @@ struct Student
 	friend ostream& operator<< (std::ostream& out, const Student& person);
 
 };
-std::ostream& operator<< (std::ostream& out, const Student& person)
+ostream& operator<< (ostream& out, const Student& person)
 {
 	out << person.name << " " << setw(7) << person.birthDay.day << "." << person.birthDay.month << "." << person.birthDay.year << setw(5) << " " << person.id;
 

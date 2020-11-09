@@ -1,3 +1,4 @@
 ﻿  main.cpp
-C:\Users\User\Desktop\Bauman\Labs\Lab8\Lab8_1\main.cpp(11,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\User\Desktop\Bauman\Labs\Lab8\Lab8_1\main.cpp(9,24): warning C4042: a: имеет недопустимый класс хранения
+C:\Users\User\Desktop\Bauman\Labs\Lab8\Lab8_1\main.cpp(183,21): warning C4018: <: несоответствие типов со знаком и без знака
   Lab8_1.vcxproj -> C:\Users\User\Desktop\Bauman\Labs\Lab8\Debug\Lab8_1.exe

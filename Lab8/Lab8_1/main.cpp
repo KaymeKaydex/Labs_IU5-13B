@@ -5,17 +5,8 @@
 #include <iomanip>
 using namespace std;
 
-int GetKeyByWord(string a)
-{
-	register int counter=0;
-	for (int i = 0; i < a.length() + 1; i++)
-	{
-		unsigned char tmp = a[i];
-		counter += tmp;
-	}
-	return counter % 256;
-}
-void Show(int *a, int n)
+
+void Show(static int *a, int n)
 {
 	cout << "[ ";
 	for(int i =0;i<n;i++)
@@ -27,6 +18,14 @@ void Show(int *a, int n)
 
 }
 
+void print(string str)
+{
+	cout << str;
+}
+void println(string str)
+{
+	cout << str << endl;
+}
 
 class CodeElement
 {
@@ -38,7 +37,7 @@ public :
 	size_t Klenght					=0;
 	size_t Codirovka;
 	string* buff = new string;
-	int stats[2][stats_size];			 //Две таблицы. Статистика для пробела и для введенного символа
+	int stats[2][stats_size];						//Две таблицы. Статистика для пробела и для введенного символа
 	unsigned char char_for_stats				= 97;// Символ для сбора статистики
 
 	void CodeDecodeTxt()
@@ -46,15 +45,15 @@ public :
 		SetConsoleCP(1251);
 
 		char* buff = new char();
-		fstream* writer = new fstream(path,ios::out | ios::in);
+		fstream* writer = new fstream(path, ios::out | ios::in | ios::binary );
+
 		int i = 0;
 		while ((*writer).get(*buff))
 		{
-			if ((*buff) == '\n') continue;
 			(*writer).seekg(-1, ios::cur);
-			unsigned char temp = *buff;
-			int a = (int)temp;
-			int b = Keys[i % Klenght];
+			register unsigned char temp = *buff;
+			register int a = (int)temp;
+			register int b = Keys[i % Klenght];
 			
 
 			// СБОР СТАТИСТИКИ. ПРОВЕРЯЕМ КОДИРУЕМ ЛИ МЫ НУЖНЫЙ СИМВОЛ
@@ -62,7 +61,7 @@ public :
 			if (temp == char_for_stats)	stats[1][a ^ b]++;
 			//КОНЕЦ СБОРА СТАТИСТИКИ
 
-			(*writer) << (char)(a^b);
+			(*writer).put( (char)(a^b) );
 				i++;
 				
 			(*writer).seekg((*writer).tellg(), ios::beg);
@@ -104,7 +103,7 @@ public :
 		if (tp == backspace)
 			cout << "Statistic for backspace"<<endl;
 		else
-			cout << "Statistic for symbol " << char(char_for_stats)<<endl;
+			cout << "Statistic for symbol " << char_for_stats<<endl;
 		cout << char(218)<< string(89, char(196));
 		
 		cout <<endl<< setw(6)<<char(179);
@@ -148,7 +147,8 @@ static size_t menu()
 	cout <<'\t'<< '\t' << string(10,'=')<<"Выберите действие"<<string(10,'=')<<endl;
 	cout << '\t' << "1-просмотр массива ключей," << endl;
 	cout << '\t' << "2-кодирование/декодирование текстового файла," << endl;
-	cout << '\t' << "3-выйти из программы."<<endl;
+	cout << '\t' << "3-чтение текстового файла," << endl;
+	cout << '\t' << "4-выйти из программы."<<endl;
 	int res = 0;
 	cout << ">>";
 	cin >> res;
@@ -161,68 +161,86 @@ static size_t menu()
 	return res;
 }
 
+
+
+int* genKeys(ifstream* codeNoteFile, size_t& lenCodeNote) {
+	lenCodeNote = 0;
+	char symb;
+	while (codeNoteFile->get(symb))
+		if (symb == ' ' || symb == '\n')
+			lenCodeNote++;
+
+	int* codeNote = new int[lenCodeNote];
+	codeNoteFile->clear();
+	codeNoteFile->seekg(0, ios_base::beg);
+
+	string wordStr;
+	char* word;
+	int countWord = 0;
+	while (*codeNoteFile >> wordStr) {
+		word = (char*)wordStr.c_str();
+		int tempRez = 0;
+		for (int i = 0; i < wordStr.length(); i++) {
+			tempRez += (int)(unsigned char)word[i];
+		}
+		codeNote[countWord++] = tempRez % 256;
+	}
+	lenCodeNote = countWord;
+	codeNoteFile->close();
+	return codeNote;
+}
+
+
 int main()
 {	
-	system("cls");
-	setlocale(LC_ALL, "rus");
+	system("cls");										// Чистим консоль
+	setlocale(LC_ALL, "rus");							//Меняем локаль для вывода русских символов
+
 	int* Keys;											//Массив ключей, которые мы будем генерировать из кодового блокнота
 
 	string delim		=" ";							//Разделитель										
 	ifstream CodeNotepad("CodeNotepad.txt", ios::in);	// Создаем объект ifstream , даем директиву и нужное перечисление
 	string buff			= "";							//Буффер
-	size_t pos			= 0;
+	size_t pos			= 0;							//Позиция
 	string token;										// Отрезанное substr
-	int slovo, count	= 0;
+	size_t count		= 0;							//Получаем количество слов в счиатанной строке 
 	size_t i			= 0;							//Счетчик
 	
-			if (CodeNotepad.is_open() == false)
+
+			Keys = genKeys(new ifstream("CodeNotepad.txt"), count);
+			
+			print("Введите символ для сбора статистики >>");
+			char stat_symbol;
+			cin >> stat_symbol;
+
+
+			CodeElement *DCodeFile = new CodeElement("out.txt",Keys,count,1251, stat_symbol);
+			
+
+			setlocale(LC_ALL, "rus");
+			SetConsoleCP(866);
+			while (true)
 			{
-				cout << "Не удалось открыть файл CodeNotepad.txt";
-			}
-			getline(CodeNotepad, buff);				//Получили строку из файла
-
-			
-			//Считаем количество слов в строке
-			while (buff[i] == ' ' && buff[i] != '\0')
-				i++;
-			slovo = 0;
-			while (buff[i] != '\0') {
-				if (buff[i] != ' ' && slovo == 0)
+				SetConsoleCP(866);
+				switch (menu())
 				{
-					slovo = 1;
-					count++;
+				case 1:
+					Show(Keys, count);
+						break;
+				case 2:
+					(*DCodeFile).CodeDecodeTxt();
+						break;
+				case 3:
+					(*DCodeFile).ReadTxt();
+						break;
+				case 4:
+					return 0;
+						break;
 				}
-				else if (buff[i] == ' ')
-					slovo = 0;
-				i++;
 			}
 
-			cout << "Количество слов в строке " << count<<endl;
-			Keys = new int[count];
 
-			i = 0;
-			
-			while ((pos = buff.find(delim)) != string::npos) { //Получаем каждое слово по отдельности
-				token = buff.substr(0, pos);
-				cout << token << endl;
-				buff.erase(0, pos + delim.length());
-				Keys[i] = GetKeyByWord(token);
-				i++;
-			}
-			Keys[i] = GetKeyByWord(buff);
-			cout << buff << endl;
-
-			cout << "Массив ключей : ";
-			Show(Keys, count);
-			
-			unsigned char tmp = 'а';
-			CodeElement *DCodeFile = new CodeElement("Text.txt",Keys,count,1251,tmp);
-			(*DCodeFile).ReadTxt();
-			(*DCodeFile).CodeDecodeTxt();
-			(*DCodeFile).ShowStats(CodeElement::my_char);
-			delete DCodeFile;
-			return 0;
-			
+			delete DCodeFile;			
 	
 }
 

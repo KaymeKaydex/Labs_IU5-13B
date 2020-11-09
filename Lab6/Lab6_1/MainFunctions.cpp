@@ -1,14 +1,14 @@
 #include <math.h>
-double f1(double x) {
+double f1( register double x) {
 	return x;
 }
-double f2(double x) {
+double f2(register double x) {
 	return sin(22 * x);
 }
-double f3(double x) {
+double f3(register double x) {
 	return pow(x, 4);
 }
-double f4(double x) {
+double f4(register double x) {
 	return atan(x);
 }
 

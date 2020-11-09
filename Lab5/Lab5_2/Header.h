@@ -9,6 +9,7 @@ void Show(T* array, unsigned short int lenght = 1) {
 		std::cout << array[i]<<"\n";
 	}
 }
+
 template <typename T>
 void Reverse(T* Array, unsigned short int lenght = 1)
 {
