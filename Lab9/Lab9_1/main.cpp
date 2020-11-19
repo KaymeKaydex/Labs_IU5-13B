@@ -1,8 +1,11 @@
 #include <iostream>
 #include <iomanip>
 #include <vector>
+#include "PrintMatrix.h";
 
 using namespace std;
+
+
 
 
 //Класс матриц
@@ -30,10 +33,6 @@ public:
         for (int i = 0; i < nrow; i++)
             matrix[i].resize(ncol);
 
-
-
-        /*matrix[0][0] = 1.0;
-        matrix[0][1] = 2.325;*/
 
         for (int i = 0; i < nrow; i++)
         {
@@ -65,26 +64,20 @@ public:
 
     void Show()
     {
-        size_t w = 10, presission = 3;
-        string name = "";
-        cout << "Текущее состояние матрицы" << name << endl;
-        for (auto i : matrix) {
-            for (auto j : i) {
-                cout << fixed << setw(w) << setprecision(presission) << j << " ";
-            }
-            cout << endl;
-        }
+        ShowMatrix(matrix, nrow, ncol, 3);
     }
     void Show(string name)
     {
         size_t w = 10, presission = 3;
         cout << "Текущее состояние матрицы " << name << endl;
-        for (auto i : matrix) {
+        /*for (auto i : matrix) {
             for (auto j : i) {
                 cout << fixed << setw(w) << setprecision(presission) << j << " ";
             }
             cout << endl;
-        }
+        }*/
+
+        ShowMatrix(matrix, nrow, ncol, 3);
     }
 
 
@@ -371,6 +364,7 @@ int main()
         {-1},
         {0},
         {6}
+
     };
     B.Show("B");
 
@@ -383,81 +377,3 @@ int main()
     X.Show();
     return 0;
 }
-
-
-
-
-
-
-
-
-
-/*
-
-
-    int t = 3;
-    double** tmp = new double* [t];
-    for (int i = 0; i < t; i++)
-        tmp[i] = new double[t];
-
-
-    for (int i = 0; i < t; i++)
-    {
-        for (int j = 0; j < t; j++)
-            tmp[i][j] = exMatrix[i][j];
-    }
-
-    Matrix A(tmp,t,t);
-    A.Show();
-
-
-    Matrix b = A*3;
-    b.Show();
-
-    cout << "------------------"<<endl;
-    Matrix m1(3,3);
-    Matrix m2(3,2);
-
-    m1.matrix =
-    {
-        {2,5,7},
-        {3,9,15},
-        {5,16,20}
-    };
-    m2.matrix =
-    {
-        {8,1},
-        {7,2},
-        {2,-3}
-    };
-
-    m1.Show();
-    cout << string(10,'-');
-    m2.Show();
-
-    Matrix m3 =m1*m2;
-    m3.Show();
-    cout << "------------------"<<endl;
-    Matrix m4(2, 2);
-    m4.matrix =
-    {
-        {-5,7},
-        {9,8}
-    };
-    Matrix m4_copy = m4;
-    m4_copy.Show();
-    println("Тестируем инвертирование матриц");
-    makeAnInverse(m4);
-
-    println("");
-
-    println("Смотрим что к нам пришло");
-    println(m4);
-
-    cout << string(10, '-');
-
-    Matrix mres = m4_copy * m4;
-    mres.Show();
-
-
-*/

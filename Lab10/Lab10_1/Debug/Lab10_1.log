@@ -1,0 +1,8 @@
+﻿  main.cpp
+C:\Users\User\Desktop\Bauman\Labs\Lab10\Lab10_1\main.cpp(116,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\User\Desktop\Bauman\Labs\Lab10\Lab10_1\main.cpp(120,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\User\Desktop\Bauman\Labs\Lab10\Lab10_1\main.cpp(153,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\User\Desktop\Bauman\Labs\Lab10\Lab10_1\main.cpp(196,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\User\Desktop\Bauman\Labs\Lab10\Lab10_1\main.cpp(203,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\User\Desktop\Bauman\Labs\Lab10\Lab10_1\main.cpp(299): warning C4715: BinarySearch: значение возвращается не при всех путях выполнения
+  Lab10_1.vcxproj -> C:\Users\User\Desktop\Bauman\Labs\Lab10\Debug\Lab10_1.exe
