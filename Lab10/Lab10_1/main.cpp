@@ -1,12 +1,13 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
-#include <Windows.h>
-#include <fstream>
+#include <Windows.h>					//Для коррктного вывода signed char на русском языке
+#include <fstream>						
 #include "Print.h"
+
 using namespace std;
 
-enum language {rus, en };
+enum language {rus, en };				//Перечисления возможных режимов работы
 
 
 size_t Menu() {
@@ -37,8 +38,8 @@ size_t Menu() {
 
 
 
-const size_t l_word = 31;
-const size_t l_dict = 60;
+const size_t l_word = 31;				//	Константный размер максимальной длинны слова
+const size_t l_dict = 60;				//	Константный размер максимальной длинны словаря
 
 
 struct Dictionary {
@@ -131,7 +132,7 @@ void delWord(Dictionary* dict, string word, bool rus = 0)
 }
 
 
-void WriteDictionatry(string filename,Dictionary *dict, ios::_Openmode mode = ios::out)
+void WriteDictionatry(string filename,Dictionary *dict, ios::_Openmode mode = ios::out) // Передаем в качестве параметров имя файла, указатель на словарь, и по умолчанию перечисление объекта режима открытия файла
 {
 	//Первой строкой запишем количество 
 	ofstream *writer = new ofstream(filename,mode);
@@ -370,6 +371,7 @@ int main()
 		case 9:
 			print("Введите слово, которое вы хотите перевести : ");
 			cin >> buff;
+			DictionaryFormating(buff);
 			println(BinarySearch(dict, buff));
 			break;		
 		case 10:

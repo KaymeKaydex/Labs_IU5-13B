@@ -348,27 +348,26 @@ int main()
 {
     setlocale(LC_ALL, "rus");
 
-    Matrix A(3, 3);
-    Matrix B(3, 1);
+    Matrix A(2, 4);
+    Matrix B(4, 2);
 
     A.matrix =
     {
-        {1,7,3},
-        {-4,9,4},
-        {0,3,2}
+        {1,2,1,3},
+        {4,-1,5,-1}
     };
     A.Show("A");
 
     B.matrix =
     {
-        {-1},
-        {0},
-        {6}
+        {1,4},
+        {2,-1},
+        {1,5},
+        {3,-1}
 
     };
     B.Show("B");
-
-    makeAnInverse(A);
+    //makeAnInverse(A);
     A.Show("A , которая была инвертирована");
 
 
